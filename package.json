@@ -1,0 +1,40 @@
+{
+  "name": "skicker-logger-manager",
+  "version": "1.0.0",
+  "description": "lol",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_ENV=testing     node_modules/webpack/bin/webpack.js",
+    "dev":  "NODE_ENV=development node_modules/webpack/bin/webpack.js",
+    "prod": "NODE_ENV=production  node_modules/webpack/bin/webpack.js",
+    "server": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@skicker.fi:~/repos/skicker-logger-manager.git"
+  },
+  "author": "OAK",
+  "license": "ISC",
+  "dependencies": {
+    "@types/gsap": "^1.19.1",
+    "@types/jquery": "^3.2.17",
+    "@types/underscore": "^1.8.6",
+    "gsap": "^1.20.3",
+    "jquery": "^3.2.1",
+    "log4javascript": "^1.4.15",
+    "underscore": "^1.8.3",
+    "webpack-merge": "^4.1.1"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.17",
+    "copy-webpack-plugin": "^4.3.1",
+    "express": "^4.16.2",
+    "html-webpack-plugin": "^2.30.1",
+    "jasmine-core": "^2.8.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-middleware": "^2.0.4"
+  }
+}
