@@ -10,6 +10,7 @@
     "test":    "NODE_ENV=testing     node server.js",
     "dev":     "NODE_ENV=development node server.js",
     "prod":    "NODE_ENV=production WEBPACK_PUBLIC_PATH=/ node_modules/webpack/bin/webpack.js",
+    "compile": "tsc --project tsconfig.release.json",
     "release": "/bin/bash builder/release.sh"
   },
   "repository": {

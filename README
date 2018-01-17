@@ -58,13 +58,11 @@ Fix broken tests
 
 2. Package for distribution
 
-    npm run prod
+    npm run compile
 
 3. Commit changes to Git
 
-    git add --all
-    git commit
-    git tag v0.0.1
+    VERSION=0.0.2 npm run release
 
 4. Push to master
 
