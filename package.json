@@ -7,10 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "NODE_ENV=testing     node_modules/webpack/bin/webpack.js",
-    "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js",
-    "prod": "NODE_ENV=production  node_modules/webpack/bin/webpack.js",
-    "server": "node server.js"
+    "test":    "NODE_ENV=testing     node server.js",
+    "dev":     "NODE_ENV=development node server.js",
+    "prod":    "NODE_ENV=production  node_modules/webpack/bin/webpack.js",
+    "release": "/bin/bash builder/release.sh"
   },
   "repository": {
     "type": "git",
