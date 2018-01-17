@@ -8,5 +8,5 @@ require('../node_modules/jasmine-core/lib/jasmine-core/boot.js');
 const requireAll = (requireContext: any) => { requireContext.keys().map(requireContext); };
 
 declare var require: any;
-requireAll(require.context("./helpers/", true, /\.js$/));
-requireAll(require.context("./", true, /[sS]pec\.js$/));
+requireAll(require.context("./helpers/", true, /\.ts$/));
+requireAll(require.context("./", true, /[sS]pec\.ts$/));

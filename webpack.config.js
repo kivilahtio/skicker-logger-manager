@@ -7,13 +7,17 @@ const HtmlWebpackPlugin  = require('html-webpack-plugin');
 const CopyWebpackPlugin  = require('copy-webpack-plugin');
 
 
+//NODE_ENV defaults to 'development'
+var NODE_ENV = process.env.NODE_ENV;
+if (!NODE_ENV) NODE_ENV = "development";
+
 /*
   Define environment specific values for
   development | testing | production
 */
 var buildDir;
 var entry;
-switch (process.env.NODE_ENV) {
+switch (NODE_ENV) {
   case "production":
     title = "Skicker LoggerManager Demo";
     buildDir = "./dist";
@@ -62,10 +66,7 @@ var webpackCommonConfig = {
     path:       path.resolve(__dirname, buildDir),
   },
   resolve: {
-    extensions: ['.ts', '.tsx']
-  },
-  devServer: {
-    contentBase: buildDir,
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
   module: {
     rules: [
@@ -115,7 +116,7 @@ var webpackCommonConfig = {
       template: "./src/index.html.lodash",
       inject: true,
       hash: true,
-      NODE_ENV: process.env.NODE_ENV,
+      NODE_ENV: NODE_ENV,
     }),
   ],
 };
@@ -128,8 +129,12 @@ var webpackCommonConfig = {
 */
 
 var webpackConfig;
-switch (process.env.NODE_ENV) {
+switch (NODE_ENV) {
   case "production":
+
+    if (!process.env.WEBPACK_PUBLIC_PATH)
+      throw new Error("Environment variable WEBPACK_PUBLIC_PATH '"+process.env.WEBPACK_PUBLIC_PATH+
+                      "' is not defined. This should be the public base url of the website.");
 
     webpackConfig = merge(webpackCommonConfig, {
       output: {
@@ -144,7 +149,12 @@ switch (process.env.NODE_ENV) {
 
     webpackConfig = merge(webpackCommonConfig, {
       devtool: 'inline-source-map',
+      devServer: {
+        contentBase: buildDir,
+        hot: true
+      },
       plugins: [
+        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
       ]
@@ -157,7 +167,12 @@ switch (process.env.NODE_ENV) {
 
     webpackConfig = merge(webpackCommonConfig, {
       devtool: 'inline-source-map',
+      devServer: {
+        contentBase: buildDir,
+        hot: true
+      },
       plugins: [
+        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new CopyWebpackPlugin([

@@ -1,0 +1,38 @@
++>---------------------<+
+| Skicker LoggerManager |
++>---------------------<+
+
+Logger configurer for the excellent log4javascript.
+Creates loggers on demand from given configurations.
+
+see. src/Skicker/LoggerManager.ts for usage example
+
+
++>---------------<+
+|  Modifications  |
++>---------------<+
+
+To distribute an updated version of this module, do the following:
+
+1. Run tests
+
+Start test runner server
+
+    npm run test
+
+Go to localhost:5000
+And verify that all test pass in the jasmine-html reporter
+
+Fix broken tests
+
+2. Package for distribution
+
+    npm run prod
+
+3. Commit changes to Git
+
+    git add --all
+    git commit
+    git tag
+
+4. Push to master
