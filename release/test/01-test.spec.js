@@ -13,4 +13,3 @@ describe("A suite is just a function", function () {
         expect(a).toBe(true);
     });
 });
-//# sourceMappingURL=01-test.spec.js.map

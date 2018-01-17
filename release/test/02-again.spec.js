@@ -10,4 +10,3 @@ describe("A suite is just a sunction", function () {
         expect(a).toBe(true);
     });
 });
-//# sourceMappingURL=02-again.spec.js.map

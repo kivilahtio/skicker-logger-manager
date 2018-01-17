@@ -85,4 +85,3 @@ class LoggerManager {
     }
 }
 exports.LoggerManager = LoggerManager;
-//# sourceMappingURL=LoggerManager.js.map

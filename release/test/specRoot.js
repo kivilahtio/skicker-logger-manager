@@ -8,4 +8,3 @@ require('../node_modules/jasmine-core/lib/jasmine-core/boot.js');
 const requireAll = (requireContext) => { requireContext.keys().map(requireContext); };
 requireAll(require.context("./helpers/", true, /\.ts$/));
 requireAll(require.context("./", true, /[sS]pec\.ts$/));
-//# sourceMappingURL=specRoot.js.map
