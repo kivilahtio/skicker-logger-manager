@@ -1,5 +1,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin  = require('html-webpack-plugin');
@@ -17,7 +18,7 @@ switch (process.env.NODE_ENV) {
     title = "Skicker LoggerManager Demo";
     buildDir = "./dist";
     entry = {
-      app:     './src/app.js',
+      app:     './src/app.ts',
     };
     sourceMap = false;
     break;
@@ -26,7 +27,10 @@ switch (process.env.NODE_ENV) {
     title = "Skicker LoggerManager Demo Development";
     buildDir = "./dev";
     entry = {
-      app:     './src/app.js',
+      app: [
+        './src/app.ts',
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      ]
     };
     sourceMap = true;
     break;
@@ -35,7 +39,10 @@ switch (process.env.NODE_ENV) {
     title = "Skicker LoggerManager Demo Testing";
     buildDir = "./dev-test";
     entry = {
-      tests:   './test/specRoot.js',
+      tests: [
+        './test/specRoot.ts',
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      ]
     };
     sourceMap = true;
     break;
@@ -53,6 +60,9 @@ var webpackCommonConfig = {
   output: {
     filename:   '[name].bundle.js',
     path:       path.resolve(__dirname, buildDir),
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx']
   },
   devServer: {
     contentBase: buildDir,
@@ -93,7 +103,7 @@ var webpackCommonConfig = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/
+//        exclude: /node_modules/
       },
     ],
   },
@@ -134,6 +144,10 @@ switch (process.env.NODE_ENV) {
 
     webpackConfig = merge(webpackCommonConfig, {
       devtool: 'inline-source-map',
+      plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+      ]
     });
 
     break;
@@ -144,6 +158,8 @@ switch (process.env.NODE_ENV) {
     webpackConfig = merge(webpackCommonConfig, {
       devtool: 'inline-source-map',
       plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new CopyWebpackPlugin([
           { from: 'node_modules/jasmine-core/lib/jasmine-core/jasmine.css',     to: 'jasmine/' },
           { from: 'node_modules/jasmine-core/lib/jasmine-core/jasmine.js',      to: 'jasmine/' },

@@ -1,8 +1,8 @@
 "use strict";
 
-import bar from '../src/bar';
+import {LoggerManager} from "../src/Skicker/LoggerManager";
 
-bar();
+const lm: LoggerManager = new LoggerManager(true);
 
 describe("A suite is just a function", function() {
   var a;

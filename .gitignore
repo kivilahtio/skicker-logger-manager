@@ -3,4 +3,7 @@ dist/
 dev/
 dev-test/
 *.swp
-
+src/**/*.js
+src/**/*.js.map
+test/**/*.js
+test/**/*.js.map

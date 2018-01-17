@@ -1,6 +1,6 @@
 import * as $ from 'jquery';
 import {TweenMax, Power2, TimelineLite} from "gsap";
-import './style.css';
+import './app.css';
 import * as _ from 'underscore';
 
 import * as log4javascript from 'log4javascript'; //Import log level constants
