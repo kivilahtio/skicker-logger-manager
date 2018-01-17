@@ -151,7 +151,8 @@ switch (NODE_ENV) {
       devtool: 'inline-source-map',
       devServer: {
         contentBase: buildDir,
-        hot: true
+        hot: true,
+        port: 5000,
       },
       plugins: [
         new webpack.NamedModulesPlugin(),
@@ -169,7 +170,8 @@ switch (NODE_ENV) {
       devtool: 'inline-source-map',
       devServer: {
         contentBase: buildDir,
-        hot: true
+        hot: true,
+        port: 5001,
       },
       plugins: [
         new webpack.NamedModulesPlugin(),

@@ -8,14 +8,16 @@ var app = express();
 
 app.use(require('morgan')('short'));
 
+
+var webpack = require('webpack');
+var webpackConfig = require(process.env.WEBPACK_CONFIG ? process.env.WEBPACK_CONFIG : './webpack.config');
+
 // ************************************
 // This is the real meat of the example
 // ************************************
 (function() {
 
   // Step 1: Create & configure a webpack compiler
-  var webpack = require('webpack');
-  var webpackConfig = require(process.env.WEBPACK_CONFIG ? process.env.WEBPACK_CONFIG : './webpack.config');
   var compiler = webpack(webpackConfig);
 
   // Step 2: Attach the dev middleware to the compiler & the server
@@ -40,7 +42,7 @@ app.get("/multientry", function(req, res) {
 
 if (require.main === module) {
   var server = http.createServer(app);
-  server.listen(process.env.PORT || 1616, function() {
+  server.listen(process.env.PORT || webpackConfig.devServer.port, function() {
     console.log("Listening on %j", server.address());
   });
 }
