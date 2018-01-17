@@ -12,6 +12,7 @@
   "author": "Olli-Antti Kivilahti <kivilahtio@gmail.com>",
   "contributors": [],
   "main": "release/src/Skicker/LoggerManager.js",
+  "typings": "release/src/Skicker/LoggerManager.d.ts",
   "directories": {
     "lib": "./src",
     "test": "./test",

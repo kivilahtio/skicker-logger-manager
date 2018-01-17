@@ -4,6 +4,9 @@ dev/
 dev-test/
 *.swp
 src/**/*.js
+src/**/*.d.ts
 src/**/*.js.map
 test/**/*.js
+test/**/*.d.ts
 test/**/*.js.map
+release/test/**/*.d.ts
