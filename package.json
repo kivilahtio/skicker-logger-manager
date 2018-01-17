@@ -1,6 +1,6 @@
 {
   "name": "skicker-logger-manager",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Logger configuration wrapper for log4javascript",
   "keywords": [
     "log4javscript",
@@ -25,7 +25,7 @@
     "test": "NODE_ENV=testing     node server.js",
     "dev": "NODE_ENV=development node server.js",
     "prod": "NODE_ENV=production WEBPACK_PUBLIC_PATH=/ node_modules/webpack/bin/webpack.js",
-    "compile": "tsc --project tsconfig.release.json",
+    "compile": "tslint -p tsconfig.release.json -c tslint.json && tsc --project tsconfig.release.json",
     "release": "npm run compile && /bin/bash builder/release.sh"
   },
   "dependencies": {
@@ -50,6 +50,7 @@
     "style-loader": "^0.19.1",
     "ts-loader": "^3.2.0",
     "tslint": "^5.9.1",
+    "tslint-loader": "^3.5.3",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.4",

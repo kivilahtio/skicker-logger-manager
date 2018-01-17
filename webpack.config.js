@@ -103,7 +103,10 @@ var webpackCommonConfig = {
       },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: [
+          'ts-loader',
+          'tslint-loader',
+        ],
 //        exclude: /node_modules/
       },
     ],
