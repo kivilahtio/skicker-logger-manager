@@ -2,7 +2,12 @@
   "name": "skicker-logger-manager",
   "version": "0.0.4",
   "description": "Logger configuration wrapper for log4javascript",
-  "keywords": ["log4javscript", "logging", "logger", "log"],
+  "keywords": [
+    "log4javscript",
+    "logging",
+    "logger",
+    "log"
+  ],
   "license": "ISC",
   "author": "Olli-Antti Kivilahti <kivilahtio@gmail.com>",
   "contributors": [],
@@ -44,6 +49,7 @@
     "morgan": "^1.9.0",
     "style-loader": "^0.19.1",
     "ts-loader": "^3.2.0",
+    "tslint": "^5.9.1",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.4",

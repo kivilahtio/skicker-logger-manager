@@ -20,7 +20,7 @@ const log4javascript = require("log4javascript");
  * let logger = loggerManager.getLogger("Skicker.Stepper");
  * logger.error("Skicker.Stepper here logging errorly"); //Logged
  * logger.warn( "Skicker.Stepper here logging warning"); //Not logged
-*/
+ */
 class LoggerManager {
     constructor(injectRootLogger) {
         this.configurers = {};
@@ -29,27 +29,6 @@ class LoggerManager {
         if (injectRootLogger) {
             this.injectRootLogger();
         }
-    }
-    /**
-     * Initializes the root logger, so other instantiated loggers can inherit it's configuration
-    */
-    initRootLogger() {
-        var log = this.getLogger();
-        var appender = new log4javascript.BrowserConsoleAppender();
-        // Change the desired configuration options
-        appender.setThreshold(log4javascript.Level.ALL);
-        // Define the log layout
-        var layout = new log4javascript.PatternLayout("%d{HH:mm:ss}[%-5p]%c: %m");
-        appender.setLayout(layout);
-        // Add the appender to the logger
-        log.addAppender(appender);
-    }
-    /**
-     * Injects the root logger to window.logger so it can be played with from the developer console
-    */
-    injectRootLogger() {
-        window.logger = this.getLogger();
-        window.logger.info("root log4javascript.Logger injected to window.logger");
     }
     /**
      * @param loggerName The name/package of the logger to get and configure
@@ -62,15 +41,20 @@ class LoggerManager {
         else {
             logger = log4javascript.getLogger(loggerName);
         }
-        //If logger is named and we haven't initiated that logger yet, proceed to invoke the init function
+        // If logger is named and we haven't initiated that logger yet, proceed to invoke the init function
         if (loggerName && !this.initedLoggers[loggerName]) {
             this.configurers[loggerName](logger);
         }
         return logger;
     }
+    /** TODO
+     * Loads configuration from the given log4j configuration text/string or a JSON-object
+     *
+     * @param configJson
+     */
     loadConfigurations(configJsonOrTxt) {
         let config;
-        if (typeof configJsonOrTxt === 'string') {
+        if (typeof configJsonOrTxt === "string") {
             config = JSON.parse(configJsonOrTxt);
         }
     }
@@ -82,6 +66,27 @@ class LoggerManager {
      */
     setConfigurer(loggerName, configurer) {
         this.configurers[loggerName] = configurer;
+    }
+    /**
+     * Initializes the root logger, so other instantiated loggers can inherit it's configuration
+     */
+    initRootLogger() {
+        const log = this.getLogger();
+        const appender = new log4javascript.BrowserConsoleAppender();
+        // Change the desired configuration options
+        appender.setThreshold(log4javascript.Level.ALL);
+        // Define the log layout
+        const layout = new log4javascript.PatternLayout("%d{HH:mm:ss}[%-5p]%c: %m");
+        appender.setLayout(layout);
+        // Add the appender to the logger
+        log.addAppender(appender);
+    }
+    /**
+     * Injects the root logger to window.logger so it can be played with from the developer console
+     */
+    injectRootLogger() {
+        window.logger = this.getLogger();
+        window.logger.info("root log4javascript.Logger injected to window.logger");
     }
 }
 exports.LoggerManager = LoggerManager;

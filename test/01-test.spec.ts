@@ -4,19 +4,18 @@ import {LoggerManager} from "../src/Skicker/LoggerManager";
 
 const lm: LoggerManager = new LoggerManager(true);
 
-describe("A suite is just a function", function() {
-  var a;
+describe("A suite is just a function", () => {
+  let a: any;
 
-  it("and so is a spec", function() {
+  it("and so is a spec", () => {
     a = true;
 
     expect(a).toBe(true);
   });
 
-  it("and so is a specarrrr", function() {
+  it("and so is a specarrrr", () => {
     a = true;
 
     expect(a).toBe(true);
   });
 });
-

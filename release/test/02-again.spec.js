@@ -1,11 +1,11 @@
 "use strict";
-describe("A suite is just a sunction", function () {
-    var a;
-    it("and so is a spec", function () {
+describe("A suite is just a sunction", () => {
+    let a;
+    it("and so is a spec", () => {
         a = true;
         expect(a).toBe(true);
     });
-    it("and so is a specarrrr", function () {
+    it("and so is a specarrrr", () => {
         a = true;
         expect(a).toBe(true);
     });

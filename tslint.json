@@ -1,9 +1,12 @@
 {
-    "defaultSeverity": "warning",
+    "defaultSeverity": "error",
     "extends": [
         "tslint:recommended"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+        "no-consecutive-blank-lines": [true, 2],
+        "max-line-length": [true, 160]
+    },
     "rulesDirectory": []
 }
