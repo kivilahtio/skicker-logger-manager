@@ -1,24 +1,28 @@
 {
   "name": "skicker-logger-manager",
-  "version": "1.0.0",
-  "description": "lol",
-  "main": "index.js",
+  "version": "0.0.4",
+  "description": "Logger configuration wrapper for log4javascript",
+  "keywords": ["log4javscript", "logging", "logger", "log"],
+  "license": "ISC",
+  "author": "Olli-Antti Kivilahti <kivilahtio@gmail.com>",
+  "contributors": [],
+  "main": "release/src/Skicker/LoggerManager.js",
   "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test":    "NODE_ENV=testing     node server.js",
-    "dev":     "NODE_ENV=development node server.js",
-    "prod":    "NODE_ENV=production WEBPACK_PUBLIC_PATH=/ node_modules/webpack/bin/webpack.js",
-    "compile": "tsc --project tsconfig.release.json",
-    "release": "/bin/bash builder/release.sh"
+    "lib": "./src",
+    "test": "./test",
+    "example": "./src"
   },
   "repository": {
     "type": "git",
     "url": "git@skicker.fi:~/repos/skicker-logger-manager.git"
   },
-  "author": "OAK",
-  "license": "ISC",
+  "scripts": {
+    "test": "NODE_ENV=testing     node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "prod": "NODE_ENV=production WEBPACK_PUBLIC_PATH=/ node_modules/webpack/bin/webpack.js",
+    "compile": "tsc --project tsconfig.release.json",
+    "release": "npm run compile && /bin/bash builder/release.sh"
+  },
   "dependencies": {
     "@types/gsap": "^1.19.1",
     "@types/jquery": "^3.2.17",
@@ -45,5 +49,6 @@
     "webpack-dev-middleware": "^2.0.4",
     "webpack-dev-server": "^2.11.0",
     "webpack-hot-middleware": "^2.21.0"
-  }
+  },
+  "private": true
 }
