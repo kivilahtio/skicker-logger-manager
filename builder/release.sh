@@ -3,5 +3,5 @@ test -z $VERSION && echo "Environment VERSION is not set. You must set the versi
 git add --all
 git commit
 git tag $VERSION
-git push origin master
+git push origin master --tags
 
