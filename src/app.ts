@@ -3,17 +3,16 @@ import * as $ from "jquery";
 import * as _ from "underscore";
 import "./app.css";
 
-import * as log4javascript from "log4javascript"; // Import log level constants
-import {LoggerManager} from "./Skicker/LoggerManager";
+import {log4javascript, LoggerManager} from "./Skicker/LoggerManager";
 
-const loggerManager: LoggerManager = new LoggerManager(true);
-(window as any).logger = loggerManager.getLogger();
+LoggerManager.init(true);
+(window as any).logger = LoggerManager.getLogger();
 (window as any).logger.error("Logging sucks!");
 
-loggerManager.setConfigurer("Skicker.Stepper", (logger) => {
+LoggerManager.setConfigurer("Skicker.Stepper", (logger) => {
   logger.setLevel(log4javascript.Level.ERROR);
 });
-const logger = loggerManager.getLogger("Skicker.Stepper");
+const logger = LoggerManager.getLogger("Skicker.Stepper");
 logger.fatal("Skicker.Stepper here logging fatally");
 logger.error("Skicker.Stepper here logging errorly");
 logger.warn("Skicker.Stepper here logging warning");
