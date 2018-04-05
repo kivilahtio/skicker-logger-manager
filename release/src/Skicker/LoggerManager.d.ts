@@ -35,7 +35,7 @@ export declare abstract class LoggerManager {
      *
      * @param injectRootLogger Inject the root logger to window.logger?
      */
-    static init(injectRootLogger?: boolean): boolean;
+    static init(): boolean;
     /** TODO
      * Loads configuration from the given log4j configuration text/string or a JSON-object
      *
@@ -56,7 +56,7 @@ export declare abstract class LoggerManager {
      */
     private static initRootLogger();
     /**
-     * Injects the root logger to window.logger so it can be played with from the developer console
+     * Injects the LoggerManager to window.loggerManager so it can be shared between multiple libraries using the same LoggerManager
      */
-    private static injectRootLogger();
+    private static injectLoggerManager();
 }

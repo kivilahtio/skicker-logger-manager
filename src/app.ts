@@ -5,17 +5,17 @@ import "./app.css";
 
 import {log4javascript, LoggerManager} from "./Skicker/LoggerManager";
 
-LoggerManager.init(true);
+LoggerManager.init();
 (window as any).logger = LoggerManager.getLogger();
 (window as any).logger.error("Logging sucks!");
 
 LoggerManager.setConfigurer("Skicker.Stepper", (logger) => {
   logger.setLevel(log4javascript.Level.ERROR);
 });
-const logger = LoggerManager.getLogger("Skicker.Stepper");
-logger.fatal("Skicker.Stepper here logging fatally");
-logger.error("Skicker.Stepper here logging errorly");
-logger.warn("Skicker.Stepper here logging warning");
+const loggerr = LoggerManager.getLogger("Skicker.Stepper");
+loggerr.fatal("Skicker.Stepper here logging fatally");
+loggerr.error("Skicker.Stepper here logging errorly");
+loggerr.warn("Skicker.Stepper here logging warning");
 
 
 $(() => {

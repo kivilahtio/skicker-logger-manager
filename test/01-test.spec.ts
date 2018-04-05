@@ -4,26 +4,18 @@ describe("LoggerManager initializes,", () => {
 
   describe("Initialize,", () => {
     it("Initialize LoggerManager", () => {
-      expect(LoggerManager.init(false)).toBe(true);
+      expect(LoggerManager.init()).toBe(true);
     });
-    it("Root Logger not in window.logger", () => {
-      expect((window as any).logger).toEqual(undefined);
-    });
-  });
-
-  describe("Initialize and inject root logger to window,", () => {
-    it("Initialize LoggerManager", () => {
-      expect(LoggerManager.init(true)).toBe(true);
-    });
-    it("Root Logger in window.logger", () => {
-      expect(typeof (window as any).logger).toEqual("object"); // jasmine.any(log4javascript.Logger) doesn't work because of a missing constructor function.
+    it("LoggerManager in window.loggerManager", () => {
+      expect((window as any).loggerManager).toBe(LoggerManager);
     });
   });
 
   describe("window.logger logging with different log levels,", () => {
 
     beforeAll(() => {
-      LoggerManager.init(true);
+      LoggerManager.init();
+      (window as any).logger = (window as any).loggerManager.getLogger();
       // "callAppenders" is a private method, so we need to do type casting to access it illegally.
       spyOn((window as any).logger as any, "callAppenders").and.callThrough();
     });
@@ -31,7 +23,7 @@ describe("LoggerManager initializes,", () => {
     it("window.logger logs a fatal message", () => {
       (window as any).logger.fatal("THIS IS THE END!");
 
-      const loggingEvent: log4javascript.LoggingEvent = ((window as any).logger as any).callAppenders.calls.argsFor(0)[0];
+      const loggingEvent: log4javascript.LoggingEvent = ((window as any).logger as any).callAppenders.calls.argsFor(0)[0]; // Probe a private method here
       expect(loggingEvent.level).toEqual(log4javascript.Level.FATAL);
       expect(loggingEvent.messages.toString()).toEqual("THIS IS THE END!");
     });
@@ -48,7 +40,7 @@ describe("LoggerManager initializes,", () => {
 
     let loggerTest: log4javascript.Logger;
     beforeAll(() => {
-      LoggerManager.init(true);
+      LoggerManager.init();
       LoggerManager.setConfigurer("TestClass", (logger) => {
         logger.setLevel(log4javascript.Level.INFO);
       });

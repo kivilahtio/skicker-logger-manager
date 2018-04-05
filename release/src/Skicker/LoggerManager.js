@@ -32,32 +32,38 @@ class LoggerManager {
      * @param loggerName The name/package of the logger to get and configure. If nothing is given, returns the root logger.
      */
     static getLogger(loggerName) {
-        let logger;
-        if (!loggerName) {
-            logger = log4javascript.getRootLogger();
+        // If there is an instance of a global LoggerManager, use that instead
+        if (window.loggerManager === this) {
+            // This is the global logger manager
+            let logger;
+            if (!loggerName) {
+                logger = log4javascript.getRootLogger();
+            }
+            else {
+                logger = log4javascript.getLogger(loggerName);
+            }
+            // If logger is named and we haven't initiated that logger yet, proceed to invoke the init function
+            if (loggerName && !this.initedLoggers[loggerName]) {
+                if (this.configurers[loggerName]) {
+                    this.configurers[loggerName](logger);
+                }
+                // Having a configuration for a named logger is not mandatory. Then it simply inherits configuration from ancestors.
+            }
+            return logger;
         }
         else {
-            logger = log4javascript.getLogger(loggerName);
+            // Recurse to invoke the globally initialized LoggerManager instead
+            return window.loggerManager.getLogger(loggerName);
         }
-        // If logger is named and we haven't initiated that logger yet, proceed to invoke the init function
-        if (loggerName && !this.initedLoggers[loggerName]) {
-            if (this.configurers[loggerName]) {
-                this.configurers[loggerName](logger);
-            }
-            // Having a configuration for a named logger is not mandatory. Then it simply inherits configuration from ancestors.
-        }
-        return logger;
     }
     /**
      * Initializes the underlying log4javascript. You must call this once, and only once before using loggers.
      *
      * @param injectRootLogger Inject the root logger to window.logger?
      */
-    static init(injectRootLogger) {
+    static init() {
+        this.injectLoggerManager();
         this.initRootLogger();
-        if (injectRootLogger) {
-            this.injectRootLogger();
-        }
         return true;
     }
     /** TODO
@@ -95,11 +101,10 @@ class LoggerManager {
         log.addAppender(appender);
     }
     /**
-     * Injects the root logger to window.logger so it can be played with from the developer console
+     * Injects the LoggerManager to window.loggerManager so it can be shared between multiple libraries using the same LoggerManager
      */
-    static injectRootLogger() {
-        window.logger = this.getLogger();
-        window.logger.info("root log4javascript.Logger injected to window.logger");
+    static injectLoggerManager() {
+        window.loggerManager = this;
     }
 }
 LoggerManager.configurers = {};
